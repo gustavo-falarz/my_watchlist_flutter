@@ -16,7 +16,7 @@ class _BaseContainerState extends State<BaseContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: new Stack(
+      child: Stack(
         children: <Widget>[
           widget.child,
           Visibility(

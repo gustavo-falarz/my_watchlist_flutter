@@ -1,59 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/constants.dart';
 import 'package:mywatchlist/model/content.dart';
-import 'package:mywatchlist/screens/content_detail.dart';
 
-class ContentAdapter extends StatelessWidget {
+class GridContentAdapter extends StatelessWidget {
   final Content content;
+  final Function onPressed;
 
-  const ContentAdapter({@required this.content});
+  const GridContentAdapter({@required this.content, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          ContentDetails.id,
-          arguments: content,
-        );
-      },
+      onTap: onPressed,
       child: Card(
         color: colorSecondary,
         elevation: 10.0,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Row(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Material(
                   elevation: 10.0,
-                  child: Hero(
-                    tag: 'posterImage${content.imdbID}',
-                    child: Image.network(
-                      content.poster,
-                      fit: BoxFit.fill,
-                    ),
+                  child: Image.network(
+                    content.poster,
                   ),
                 ),
               ),
               SizedBox(
-                width: 10.0,
+                height: 10.0,
               ),
               Expanded(
-                flex: 3,
+                flex: 1,
                 child: _ItemDescription(
                   title: content.title,
                   year: content.year,
                   director: content.director,
                 ),
-              ),
-              const Icon(
-                Icons.visibility,
-                size: 25.0,
-                color: colorMainText,
               ),
             ],
           ),
@@ -91,11 +76,6 @@ class _ItemDescription extends StatelessWidget {
           const Padding(padding: EdgeInsets.symmetric(vertical: 2.0)),
           Text(
             year,
-            style: const TextStyle(fontSize: 15.0),
-          ),
-          const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),
-          Text(
-            director,
             style: const TextStyle(fontSize: 15.0),
           ),
         ],

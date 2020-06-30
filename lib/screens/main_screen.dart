@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/components/base_container.dart';
+import 'package:mywatchlist/components/content_grid.dart';
 import 'package:mywatchlist/components/content_list.dart';
 import 'package:mywatchlist/model/content_data.dart';
 import 'package:mywatchlist/services/content_service.dart';
@@ -24,6 +25,7 @@ class _MainScreenState extends State<MainScreen> {
         floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,
+            color: Colors.white,
           ),
         ),
       ),
