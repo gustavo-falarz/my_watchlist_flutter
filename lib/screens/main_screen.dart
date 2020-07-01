@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/components/base_container.dart';
-import 'package:mywatchlist/components/content_grid.dart';
-import 'package:mywatchlist/components/content_list.dart';
+import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/lists/content_grid.dart';
+import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/lists/content_list.dart';
 import 'package:mywatchlist/model/content_data.dart';
+import 'package:mywatchlist/screens/add_content_screen.dart';
 import 'package:mywatchlist/services/content_service.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +28,12 @@ class _MainScreenState extends State<MainScreen> {
             Icons.add,
             color: Colors.white,
           ),
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              AddContentScreen.id,
+            );
+          },
         ),
       ),
     );

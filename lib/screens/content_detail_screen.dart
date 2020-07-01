@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mywatchlist/components/round_icon_button.dart';
+import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/buttons/round_icon_button.dart';
 import 'package:mywatchlist/constants.dart';
 import 'package:mywatchlist/model/content.dart';
+import 'package:mywatchlist/components/buttons/back_button.dart';
 
 class ContentDetails extends StatelessWidget {
   static const String id = 'details';
@@ -18,12 +18,11 @@ class ContentDetails extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.only(top: 160.0),
               child: Material(
-                elevation: 10.0,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 110.0,
+                      height: 140.0,
                     ),
                     Text(
                       content.title,
@@ -35,6 +34,9 @@ class ContentDetails extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
                     ),
                     LabelValueWidget(
                       label: 'Genre',
@@ -54,10 +56,9 @@ class ContentDetails extends StatelessWidget {
                     ),
                     LabelValueWidget(
                       label: 'Miscellaneous',
-                      value:
-                          ' Runtime: ${content.runtimeType}'
-                              '\nReleased: ${content.released}'
-                              '\nProduction: ${content.production}',
+                      value: ' Runtime: ${content.runtimeType}'
+                          '\nReleased: ${content.released}'
+                          '\nProduction: ${content.production}',
                     ),
                   ],
                 ),
@@ -65,30 +66,22 @@ class ContentDetails extends StatelessWidget {
             ),
           ),
           Material(
+            color: colorPrimary,
             elevation: 10.0,
-            child: Container(
-              color: colorPrimary,
-              width: double.maxFinite,
-              height: 160.0,
+            clipBehavior: Clip.antiAlias,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25.0),
+              bottomRight: Radius.circular(25.0),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 60.0),
-            child: Material(
-              elevation: 10.0,
-              child: Hero(
-                tag: 'posterImage${content.imdbID}',
-                child: Image.network(
-                  content.poster,
-                  fit: BoxFit.fill,
-                  height: 200.0,
-                  width: 150.0,
-                ),
-              ),
+            child: Container(
+              width: double.maxFinite,
+              height: 200.0,
+              alignment: Alignment.topLeft,
+              child: DefaultBackButton(),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 180.0),
+            padding: EdgeInsets.symmetric(vertical: 100.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
@@ -108,7 +101,21 @@ class ContentDetails extends StatelessWidget {
               ],
             ),
           ),
-
+          Container(
+            padding: EdgeInsets.only(top: 60.0),
+            child: Material(
+              elevation: 10.0,
+              child: Hero(
+                tag: 'posterImage${content.imdbID}',
+                child: Image.network(
+                  content.poster,
+                  fit: BoxFit.fill,
+                  height: 200.0,
+                  width: 150.0,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

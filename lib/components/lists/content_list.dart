@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mywatchlist/constants.dart';
 import 'package:mywatchlist/model/content.dart';
 import 'package:mywatchlist/model/content_data.dart';
-import 'package:mywatchlist/screens/content_detail.dart';
 import 'package:provider/provider.dart';
 
-import 'grid_content_adapter.dart';
+import '../adapter/content_adapter.dart';
 
-class ContentGrid extends StatelessWidget {
+class ContentList extends StatelessWidget {
   final List<Content> content;
 
-  const ContentGrid({this.content});
+  const ContentList({this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +17,15 @@ class ContentGrid extends StatelessWidget {
 
     return Container(
       color: colorContrast,
-      child: GridView.builder(
+      child: ListView.builder(
         padding: const EdgeInsets.all(8.0),
+        itemExtent: 220.0,
         itemCount: contentList.length,
         itemBuilder: (context, index) {
-          return GridContentAdapter(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                ContentDetails.id,
-                arguments: contentList[index],
-              );
-            },
+          return ContentAdapter(
             content: contentList[index],
           );
         },
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, childAspectRatio: 2 / 4),
       ),
     );
   }
