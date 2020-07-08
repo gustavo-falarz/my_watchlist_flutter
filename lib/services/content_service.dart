@@ -26,12 +26,12 @@ class ContentService {
     return list;
   }
 
-  static Future<List<Content>> addContentToWatchlist(ContentDTO dto) async {
+  static Future<String> addContentToWatchlist(ContentDTO dto) async {
     const url = 'content/add';
-    String body = jsonEncode(dto);
-    Response response = await HttpService.doPost('$url', body);
+    Map<String, dynamic> body = dto.toJson();
+   Response response = await HttpService.doPost('$url', body);
     var json = jsonDecode(response.body);
-    List<Content> list = Content.fromJsonList(json);
-    return list;
+    String message = json['data']['message'];
+    return message;
   }
 }

@@ -7,7 +7,7 @@ import 'package:mywatchlist/model/content.dart';
 import 'package:mywatchlist/model/content_data.dart';
 import 'package:mywatchlist/model/content_dto.dart';
 import 'package:mywatchlist/services/content_service.dart';
-import 'package:mywatchlist/services/uiUtils.dart';
+import 'package:mywatchlist/services/ui_utils.dart';
 import 'package:provider/provider.dart';
 
 class AddContentScreen extends StatefulWidget {
@@ -65,18 +65,28 @@ class _AddContentScreenState extends State<AddContentScreen> {
     showProgress(context);
     var contentDTO = ContentDTO(
       content: content,
-      type: content.type,
       userId: userID,
     );
-    await ContentService.addContentToWatchlist(contentDTO);
-    hideProgress(context);
+    try {
+      var message = await ContentService.addContentToWatchlist(contentDTO);
+      showMyDialog(context, title: 'Success', message: message);
+    } catch (e) {
+      showMyDialog(context, title: 'Error', message: e.message);
+    } finally {
+      hideProgress(context);
+    }
   }
 
   void findContent(String query) async {
     showProgress(context);
-    var contentLst = await ContentService.findContentOnImdb(query);
-    Provider.of<ContentData>(context, listen: false)
-        .updateSearchContentList(contentLst);
-    hideProgress(context);
+    try {
+      var contentLst = await ContentService.findContentOnImdb(query.trim());
+      Provider.of<ContentData>(context, listen: false)
+          .updateSearchContentList(contentLst);
+    } catch (e) {
+      showMyDialog(context, title: 'Error', message: e.message);
+    } finally {
+      hideProgress(context);
+    }
   }
 }

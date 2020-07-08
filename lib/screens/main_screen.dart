@@ -5,7 +5,7 @@ import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/list
 import 'package:mywatchlist/model/content_data.dart';
 import 'package:mywatchlist/screens/add_content_screen.dart';
 import 'package:mywatchlist/services/content_service.dart';
-import 'package:mywatchlist/services/uiUtils.dart';
+import 'package:mywatchlist/services/ui_utils.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
@@ -48,9 +48,14 @@ class _MainScreenState extends State<MainScreen> {
 
   void getContent() async {
     showProgress(context);
-    var contentLst = await ContentService.findContentByUser();
-    Provider.of<ContentData>(context, listen: false)
-        .updateContentList(contentLst);
-    hideProgress(context);
+    try {
+      var contentLst = await ContentService.findContentByUser();
+      Provider.of<ContentData>(context, listen: false)
+          .updateContentList(contentLst);
+    } catch (e) {
+      showMyDialog(context, title: 'Error', message: e.message);
+    } finally {
+      hideProgress(context);
+    }
   }
 }

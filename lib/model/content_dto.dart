@@ -8,4 +8,7 @@ class ContentDTO {
   String type;
 
   ContentDTO({this.userId, this.content, this.type});
+
+  Map<String, dynamic> toJson() =>
+      {'userId': userId, 'content': content.toJson(), 'type': type};
 }

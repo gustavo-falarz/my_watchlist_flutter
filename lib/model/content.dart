@@ -59,6 +59,21 @@ class Content {
     return content;
   }
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'Title': title,
+        'Year': year,
+        'Type': type,
+        'Poster': poster,
+        'Plot': plot,
+        'Director': director,
+        'Genre': genre,
+        'imdbID': imdbID,
+        'Actors': actors,
+        'Production': production,
+        'Runtime': runtime,
+      };
+
   static List<Content> fromJsonList(dynamic response) {
     List<Content> contents = [];
     Iterable jsonList = response['data'];
