@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/buttons/round_icon_button.dart';
+import 'package:mywatchlist/components/base_container.dart';
+import 'package:mywatchlist/components/buttons/back_button.dart';
 import 'package:mywatchlist/constants.dart';
 import 'package:mywatchlist/model/content.dart';
-import 'package:mywatchlist/components/buttons/back_button.dart';
+import 'package:mywatchlist/model/content_dto.dart';
+import 'package:mywatchlist/services/content_service.dart';
+import 'package:mywatchlist/services/ui_utils.dart';
 
-class ContentDetails extends StatelessWidget {
+import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/buttons/round_icon_button.dart';
+
+class ContentDetails extends StatefulWidget {
   static const String id = 'details';
 
   @override
+  _ContentDetailsState createState() => _ContentDetailsState();
+}
+
+class _ContentDetailsState extends State<ContentDetails> {
+  @override
   Widget build(BuildContext context) {
     final Content content = ModalRoute.of(context).settings.arguments;
-    return Container(
+    return BaseContainer(
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
@@ -89,6 +99,9 @@ class ContentDetails extends StatelessWidget {
                   icon: Icons.visibility,
                   color: accent,
                   iconColor: Colors.white,
+                  onPressed: () {
+                    archiveContent(content);
+                  },
                 ),
                 SizedBox(
                   width: 50.0,
@@ -97,6 +110,9 @@ class ContentDetails extends StatelessWidget {
                   icon: Icons.delete,
                   color: accent,
                   iconColor: Colors.white,
+                  onPressed: () {
+                    deleteContent(content);
+                  },
                 ),
               ],
             ),
@@ -119,6 +135,38 @@ class ContentDetails extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  deleteContent(Content content) async {
+    showProgress(context);
+    var contentDTO = ContentDTO(
+      content: content,
+      userId: userID,
+    );
+    try {
+      var message = await ContentService.deleteFromWatchlist(contentDTO);
+      showMyDialog(context, title: 'Success', message: message);
+    } catch (e) {
+      showMyDialog(context, title: 'Error', message: e.message);
+    } finally {
+      hideProgress(context);
+    }
+  }
+
+  archiveContent(Content content) async {
+    showProgress(context);
+    var contentDTO = ContentDTO(
+      content: content,
+      userId: userID,
+    );
+    try {
+      var message = await ContentService.archiveFromWatchlist(contentDTO);
+      showMyDialog(context, title: 'Success', message: message);
+    } catch (e) {
+      showMyDialog(context, title: 'Error', message: e.message);
+    } finally {
+      hideProgress(context);
+    }
   }
 }
 

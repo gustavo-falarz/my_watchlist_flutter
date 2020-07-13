@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:mywatchlist/model/content.dart';
 import 'package:mywatchlist/model/content_dto.dart';
+import 'package:mywatchlist/services/message_utils.dart';
 import 'package:mywatchlist/services/network.dart';
 
 const userID = '5a594508f6684e0007d2db5f';
@@ -29,9 +30,23 @@ class ContentService {
   static Future<String> addContentToWatchlist(ContentDTO dto) async {
     const url = 'content/add';
     Map<String, dynamic> body = dto.toJson();
-   Response response = await HttpService.doPost('$url', body);
-    var json = jsonDecode(response.body);
-    String message = json['data']['message'];
-    return message;
+    Response response = await HttpService.doPost('$url', body);
+    return parseMessage(response);
   }
+
+  static Future<String> archiveFromWatchlist(ContentDTO dto) async {
+    const url = 'content/archive';
+    Map<String, dynamic> body = dto.toJson();
+    Response response = await HttpService.doPost('$url', body);
+    return parseMessage(response);
+  }
+
+  static Future<String> deleteFromWatchlist(ContentDTO dto) async {
+    const url = 'content/delete';
+    Map<String, dynamic> body = dto.toJson();
+    Response response = await HttpService.doPost('$url', body);
+    return parseMessage(response);
+  }
+
+
 }
