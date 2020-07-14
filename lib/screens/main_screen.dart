@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mywatchlist/components/base_container.dart';
-import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/lists/content_grid.dart';
-import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/lists/content_list.dart';
+import 'package:mywatchlist/components/lists/content_list.dart';
 import 'package:mywatchlist/model/content_data.dart';
 import 'package:mywatchlist/screens/add_content_screen.dart';
 import 'package:mywatchlist/services/content_service.dart';
@@ -18,12 +16,33 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return BaseContainer(
+    return DefaultTabController(
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Movies'),
+          title: Text('Watchlist'),
+          bottom: TabBar(tabs: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text('ALL'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text('MOVIES'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text('SERIES'),
+            ),
+          ]),
         ),
-        body: ContentList(),
+        body: TabBarView(
+          children: [
+            ContentList(type: null),
+            ContentList(type: 'movie'),
+            ContentList(type: 'series'),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,

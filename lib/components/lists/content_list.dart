@@ -7,9 +7,23 @@ import 'package:provider/provider.dart';
 import '../adapter/content_adapter.dart';
 
 class ContentList extends StatelessWidget {
+  final String type;
+
+  const ContentList({@required this.type});
+
   @override
   Widget build(BuildContext context) {
-    List<Content> contentList = Provider.of<ContentData>(context).contentList;
+    List<Content> contentList = [];
+
+    if (type != null) {
+      contentList = Provider.of<ContentData>(context)
+          .contentList
+          .where((element) => element.type == type)
+          .toList();
+    } else {
+      contentList = Provider.of<ContentData>(context).contentList;
+    }
+    contentList.reversed.toList();
 
     return Container(
       color: colorContrast,
