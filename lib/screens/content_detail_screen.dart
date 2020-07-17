@@ -5,7 +5,7 @@ import 'package:mywatchlist/constants.dart';
 import 'package:mywatchlist/model/content.dart';
 import 'package:mywatchlist/model/content_dto.dart';
 import 'package:mywatchlist/services/content_service.dart';
-import 'package:mywatchlist/services/ui_utils.dart';
+import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/utils/ui_utils.dart';
 
 import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/buttons/round_icon_button.dart';
 

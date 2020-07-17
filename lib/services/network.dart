@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:mywatchlist/utils/service_exception.dart';
 
 class HttpService {
   static String baseUrl = 'https://my-watchlist-server.herokuapp.com/';
@@ -31,7 +32,7 @@ class HttpService {
     bool status = json['status'];
     if (!status) {
       String message = json['message'];
-      throw Exception(message);
+      throw ServiceException(message);
     }
   }
 }

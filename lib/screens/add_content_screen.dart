@@ -7,7 +7,8 @@ import 'package:mywatchlist/model/content.dart';
 import 'package:mywatchlist/model/content_data.dart';
 import 'package:mywatchlist/model/content_dto.dart';
 import 'package:mywatchlist/services/content_service.dart';
-import 'package:mywatchlist/services/ui_utils.dart';
+import 'package:mywatchlist/utils/task_controller.dart';
+import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/utils/ui_utils.dart';
 import 'package:provider/provider.dart';
 
 class AddContentScreen extends StatefulWidget {
@@ -61,32 +62,44 @@ class _AddContentScreenState extends State<AddContentScreen> {
     );
   }
 
-  void addToWatchlist(Content content) async {
-    showProgress(context);
-    var contentDTO = ContentDTO(
-      content: content,
-      userId: userID,
-    );
-    try {
-      var message = await ContentService.addContentToWatchlist(contentDTO);
-      showMyDialog(context, title: 'Success', message: message);
-    } catch (e) {
-      showMyDialog(context, title: 'Error', message: e.message);
-    } finally {
-      hideProgress(context);
-    }
+  void addToWatchlist(Content content) {
+    TaskController(
+      task: () async {
+        var contentDTO = ContentDTO(
+          content: content,
+          userId: userID,
+        );
+        var message = await ContentService.addContentToWatchlist(contentDTO);
+        showMyDialog(context, title: 'Success', message: message);
+      },
+      onStart: () {
+        showProgress(context);
+      },
+      onError: (e) {
+        showErrorDialog(context, message: e.message);
+      },
+      onFinished: () {
+        hideProgress(context);
+      },
+    ).execute();
   }
 
-  void findContent(String query) async {
-    showProgress(context);
-    try {
-      var contentLst = await ContentService.findContentOnImdb(query.trim());
-      Provider.of<ContentData>(context, listen: false)
-          .updateSearchContentList(contentLst);
-    } catch (e) {
-      showMyDialog(context, title: 'Error', message: e.message);
-    } finally {
-      hideProgress(context);
-    }
+  void findContent(String query) {
+    TaskController(
+      task: () async {
+        var contentLst = await ContentService.findContentOnImdb(query.trim());
+        Provider.of<ContentData>(context, listen: false)
+            .updateSearchContentList(contentLst);
+      },
+      onStart: () {
+        showProgress(context);
+      },
+      onError: (e) {
+        showErrorDialog(context, message: e.message);
+      },
+      onFinished: () {
+        hideProgress(context);
+      },
+    ).execute();
   }
 }

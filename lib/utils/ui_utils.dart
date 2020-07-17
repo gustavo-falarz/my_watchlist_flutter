@@ -11,6 +11,16 @@ void hideProgress(BuildContext context) {
   Provider.of<ContentData>(context, listen: false).showProgress(false);
 }
 
+
+void showSuccessDialog(BuildContext context, {String message}){
+  showMyDialog(context, title: 'Success', message: message);
+}
+
+
+void showErrorDialog(BuildContext context, {String message}){
+  showMyDialog(context, title: 'Oops', message: message);
+}
+
 Future<void> showMyDialog(BuildContext context,
     {@required String title, @required String message}) async {
   return showDialog<void>(
