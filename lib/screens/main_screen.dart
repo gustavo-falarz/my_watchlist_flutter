@@ -3,6 +3,7 @@ import 'package:mywatchlist/components/base_container.dart';
 import 'package:mywatchlist/components/lists/content_list.dart';
 import 'package:mywatchlist/model/content_data.dart';
 import 'package:mywatchlist/screens/add_content_screen.dart';
+import '../main.dart';
 import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/utils/task_controller.dart';
 import 'package:mywatchlist/services/content_service.dart';
 import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/utils/ui_utils.dart';
@@ -15,7 +16,7 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen> with RouteAware {
   @override
   Widget build(BuildContext context) {
     return BaseContainer(
@@ -64,8 +65,19 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context));
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPopNext() {
     getContent();
   }
 

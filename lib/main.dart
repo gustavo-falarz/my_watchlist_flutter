@@ -6,11 +6,15 @@ import 'package:mywatchlist/screens/content_detail_screen.dart';
 import 'package:mywatchlist/screens/main_screen.dart';
 import 'package:provider/provider.dart';
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
+
 void main() {
   runApp(
     ChangeNotifierProvider<ContentData>(
       create: (context) => ContentData(),
       child: MaterialApp(
+        navigatorObservers: [routeObserver],
         initialRoute: MainScreen.id,
         routes: {
           MainScreen.id: (context) => MainScreen(),
