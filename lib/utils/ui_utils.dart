@@ -22,7 +22,7 @@ void showErrorDialog(BuildContext context, {String message}){
 }
 
 Future<void> showMyDialog(BuildContext context,
-    {@required String title, @required String message}) async {
+    {@required String title, @required String message, Function function}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -40,6 +40,9 @@ Future<void> showMyDialog(BuildContext context,
           FlatButton(
             child: Text('OK'),
             onPressed: () {
+              if(function != null){
+                function();
+              }
               Navigator.of(context).pop();
             },
           ),

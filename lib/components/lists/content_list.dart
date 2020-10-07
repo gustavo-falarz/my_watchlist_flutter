@@ -23,7 +23,7 @@ class ContentList extends StatelessWidget {
     } else {
       contentList = Provider.of<ContentData>(context).contentList;
     }
-    contentList.reversed.toList();
+    contentList = contentList.reversed.toList();
 
     return Container(
       color: colorContrast,

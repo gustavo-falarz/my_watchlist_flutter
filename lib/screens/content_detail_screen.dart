@@ -145,9 +145,20 @@ class _ContentDetailsState extends State<ContentDetails> {
     );
     try {
       var message = await ContentService.deleteFromWatchlist(contentDTO);
-      showMyDialog(context, title: 'Success', message: message);
+      showMyDialog(
+        context,
+        title: 'Success',
+        message: message,
+        function: () {
+          Navigator.pop(context);
+        },
+      );
     } catch (e) {
-      showMyDialog(context, title: 'Error', message: e.message);
+      showMyDialog(
+        context,
+        title: 'Error',
+        message: e.message,
+      );
     } finally {
       hideProgress(context);
     }
@@ -161,9 +172,20 @@ class _ContentDetailsState extends State<ContentDetails> {
     );
     try {
       var message = await ContentService.archiveFromWatchlist(contentDTO);
-      showMyDialog(context, title: 'Success', message: message);
+      showMyDialog(
+        context,
+        title: 'Success',
+        message: message,
+        function: () {
+          Navigator.pop(context);
+        },
+      );
     } catch (e) {
-      showMyDialog(context, title: 'Error', message: e.message);
+      showMyDialog(
+        context,
+        title: 'Error',
+        message: e.message,
+      );
     } finally {
       hideProgress(context);
     }

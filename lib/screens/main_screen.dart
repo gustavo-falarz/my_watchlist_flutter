@@ -68,6 +68,7 @@ class _MainScreenState extends State<MainScreen> with RouteAware {
   void didChangeDependencies() {
     super.didChangeDependencies();
     routeObserver.subscribe(this, ModalRoute.of(context));
+    getContent();
   }
 
   @override
@@ -84,9 +85,9 @@ class _MainScreenState extends State<MainScreen> with RouteAware {
   void getContent() {
     TaskController(
       task: () async {
-        var contentLst = await ContentService.findContentByUser();
+        var contentList = await ContentService.findContentByUser();
         Provider.of<ContentData>(context, listen: false)
-            .updateContentList(contentLst);
+            .updateContentList(contentList);
       },
       onStart: () {
         showProgress(context);

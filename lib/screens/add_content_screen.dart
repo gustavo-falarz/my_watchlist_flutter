@@ -70,13 +70,23 @@ class _AddContentScreenState extends State<AddContentScreen> {
           userId: userID,
         );
         var message = await ContentService.addContentToWatchlist(contentDTO);
-        showMyDialog(context, title: 'Success', message: message);
+        showMyDialog(
+          context,
+          title: 'Success',
+          message: message,
+          function: () {
+            Navigator.pop(context);
+          },
+        );
       },
       onStart: () {
         showProgress(context);
       },
       onError: (e) {
-        showErrorDialog(context, message: e.message);
+        showErrorDialog(
+          context,
+          message: e.message,
+        );
       },
       onFinished: () {
         hideProgress(context);
@@ -95,7 +105,10 @@ class _AddContentScreenState extends State<AddContentScreen> {
         showProgress(context);
       },
       onError: (e) {
-        showErrorDialog(context, message: e.message);
+        showErrorDialog(
+          context,
+          message: e.message,
+        );
       },
       onFinished: () {
         hideProgress(context);
