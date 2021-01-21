@@ -1,4 +1,4 @@
-import 'content.dart';
+import '../content.dart';
 
 class ContentDTO {
   String userId;

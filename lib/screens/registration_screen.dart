@@ -19,7 +19,7 @@ class _RegistrationState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cadastro"),
+        title: Text("Sign-up"),
       ),
       backgroundColor: colorPrimary,
       body: Padding(
@@ -40,7 +40,7 @@ class _RegistrationState extends State<RegistrationScreen> {
             ),
             RoundedButton(
               onPressed: () {},
-              label: "Cadastrar-se",
+              label: "Register",
               color: additionalButton,
             ),
           ],

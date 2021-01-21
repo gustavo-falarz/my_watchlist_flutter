@@ -2,17 +2,18 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:mywatchlist/model/content.dart';
-import 'package:mywatchlist/model/content_dto.dart';
+import 'package:mywatchlist/model/dto/content_dto.dart';
 import 'package:mywatchlist/services/message_utils.dart';
 import 'package:mywatchlist/services/network.dart';
+import 'package:mywatchlist/utils/data_utils.dart';
 
-const userID = '60086b6017ac130004f4f14f';
 
 class ContentService {
   static Future<List<Content>> findContentByUser() async {
     const url = 'content/find';
+    String userId = await getUserId();
 
-    Response response = await HttpService.doGet('$url/$userID');
+    Response response = await HttpService.doGet('$url/$userId');
     var json = jsonDecode(response.body);
     List<Content> list = Content.fromJsonList(json);
     return list;

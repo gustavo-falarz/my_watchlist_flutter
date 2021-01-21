@@ -16,7 +16,6 @@ void showSuccessDialog(BuildContext context, {String message}){
   showMyDialog(context, title: 'Success', message: message);
 }
 
-
 void showErrorDialog(BuildContext context, {String message}){
   showMyDialog(context, title: 'Oops', message: message);
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/components/base_container.dart';
 import 'package:mywatchlist/components/buttons/back_button.dart';
+import 'package:mywatchlist/components/buttons/round_icon_button.dart';
 import 'package:mywatchlist/constants.dart';
 import 'package:mywatchlist/model/content.dart';
-import 'package:mywatchlist/model/content_dto.dart';
+import 'package:mywatchlist/model/dto/content_dto.dart';
 import 'package:mywatchlist/services/content_service.dart';
-import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/utils/ui_utils.dart';
-
-import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/components/buttons/round_icon_button.dart';
+import 'package:mywatchlist/utils/data_utils.dart';
+import 'package:mywatchlist/utils/ui_utils.dart';
 
 class ContentDetails extends StatefulWidget {
   static const String id = 'details';
@@ -141,7 +141,7 @@ class _ContentDetailsState extends State<ContentDetails> {
     showProgress(context);
     var contentDTO = ContentDTO(
       content: content,
-      userId: userID,
+      userId: await getUserId(),
     );
     try {
       var message = await ContentService.deleteFromWatchlist(contentDTO);
@@ -168,7 +168,7 @@ class _ContentDetailsState extends State<ContentDetails> {
     showProgress(context);
     var contentDTO = ContentDTO(
       content: content,
-      userId: userID,
+      userId: await getUserId(),
     );
     try {
       var message = await ContentService.archiveFromWatchlist(contentDTO);

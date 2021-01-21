@@ -5,10 +5,11 @@ import 'package:mywatchlist/components/headers/top_search_header.dart';
 import 'package:mywatchlist/components/lists/search_content_list.dart';
 import 'package:mywatchlist/model/content.dart';
 import 'package:mywatchlist/model/content_data.dart';
-import 'package:mywatchlist/model/content_dto.dart';
+import 'package:mywatchlist/model/dto/content_dto.dart';
 import 'package:mywatchlist/services/content_service.dart';
+import 'package:mywatchlist/utils/data_utils.dart';
 import 'package:mywatchlist/utils/task_controller.dart';
-import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/utils/ui_utils.dart';
+import 'package:mywatchlist/utils/ui_utils.dart';
 import 'package:provider/provider.dart';
 
 class AddContentScreen extends StatefulWidget {
@@ -67,7 +68,7 @@ class _AddContentScreenState extends State<AddContentScreen> {
       task: () async {
         var contentDTO = ContentDTO(
           content: content,
-          userId: userID,
+          userId: await getUserId(),
         );
         var message = await ContentService.addContentToWatchlist(contentDTO);
         showMyDialog(
