@@ -6,7 +6,7 @@ import 'package:mywatchlist/model/content_dto.dart';
 import 'package:mywatchlist/services/message_utils.dart';
 import 'package:mywatchlist/services/network.dart';
 
-const userID = '5a594508f6684e0007d2db5f';
+const userID = '60086b6017ac130004f4f14f';
 
 class ContentService {
   static Future<List<Content>> findContentByUser() async {

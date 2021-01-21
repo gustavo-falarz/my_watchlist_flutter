@@ -12,7 +12,7 @@ import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/utils/ui_utils.
 import 'package:provider/provider.dart';
 
 class AddContentScreen extends StatefulWidget {
-  static const String id = 'add';
+  static const String id = 'add-content';
 
   @override
   _AddContentScreenState createState() => _AddContentScreenState();
