@@ -86,8 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() {
     TaskController(
       task: () async {
-        var user = await UserService.validate(email, password);
+        var user = await UserService.validate(email.trim(), password.trim());
         setUserId(user.id);
+        Navigator.pushNamed(context, MainScreen.id);
       },
       onStart: () {
         showProgress(context);
@@ -99,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
       onFinished: () {
-        Navigator.pushNamed(context, MainScreen.id);
+        hideProgress(context);
       },
     ).execute();
   }

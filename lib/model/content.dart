@@ -72,11 +72,11 @@ class Content {
         'Actors': actors,
         'Production': production,
         'Runtime': runtime,
+        'Released': released,
       };
 
-  static List<Content> fromJsonList(dynamic response) {
+  static List<Content> fromJsonList(dynamic jsonList) {
     List<Content> contents = [];
-    Iterable jsonList = response['data'];
     for (var json in jsonList) {
       Content content = fromJson(json);
       contents.add(content);

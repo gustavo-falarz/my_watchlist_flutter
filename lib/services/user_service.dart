@@ -11,8 +11,7 @@ class UserService {
     const url = 'user/validate';
 
     UserDTO dto = UserDTO(email: email, password: password);
-    Response response = await HttpService.doPost(url, dto.toJson());
-    var json = jsonDecode(response.body);
+    var json = await HttpService.doPost(url, dto.toJson());
     User user = User.fromJson(json);
     return user;
   }

@@ -8,11 +8,10 @@ class User {
   User({this.id, this.email, this.status});
 
   static User fromJson(dynamic json) {
-    var data = json['data'];
     User user = User(
-      id: data['id'],
-      email: data['email'],
-      status: data['status'],
+      id: json['id'],
+      email: json['email'],
+      status: json['status'],
     );
     return user;
   }
