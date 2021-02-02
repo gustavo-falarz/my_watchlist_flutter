@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/constants.dart';
-import 'package:mywatchlist/model/content.dart';
+import 'package:mywatchlist/model/content_model.dart';
 import 'package:mywatchlist/model/content_data.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ class ContentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Content> contentList = [];
+    List<ContentModel> contentList = [];
 
     if (type != null) {
       contentList = Provider.of<ContentData>(context)

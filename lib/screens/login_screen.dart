@@ -8,7 +8,6 @@ import 'package:mywatchlist/services/user_service.dart';
 import 'package:mywatchlist/utils/data_utils.dart';
 import 'package:mywatchlist/utils/task_controller.dart';
 import 'package:mywatchlist/utils/ui_utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
 
@@ -20,15 +19,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
   String email;
   String password;
 
   @override
   Widget build(BuildContext context) {
+    checkUserSignedIn();
     return BaseContainer(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text("Welcome"),
         ),
@@ -37,6 +36,13 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
+              Container(
+                height: 200.0,
+                child: Image.asset('images/logo.png'),
+              ),
+              SizedBox(
+                height: 80.0,
+              ),
               RoundedTextField(
                 hint: "Email",
                 onTextChanged: (text) {
@@ -44,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
               SizedBox(
-                height: 16.0,
+                height: 20.0,
               ),
               RoundedTextField(
                 obscure: true,
@@ -54,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
               SizedBox(
-                height: 16.0,
+                height: 20.0,
               ),
               RoundedButton(
                 onPressed: () {
@@ -64,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: accent,
               ),
               SizedBox(
-                height: 16.0,
+                height: 20.0,
               ),
               RoundedButton(
                 onPressed: () {
@@ -76,6 +82,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 label: "Sign-up",
                 color: additionalButton,
               ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                "Forgot password",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15.0,
+                ),
+              )
             ],
           ),
         ),
@@ -88,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
       task: () async {
         var user = await UserService.validate(email.trim(), password.trim());
         setUserId(user.id);
-        Navigator.pushNamed(context, MainScreen.id);
+        callHomeScreen();
       },
       onStart: () {
         showProgress(context);
@@ -103,5 +119,16 @@ class _LoginScreenState extends State<LoginScreen> {
         hideProgress(context);
       },
     ).execute();
+  }
+
+  void callHomeScreen() {
+      Navigator.pushNamed(context, MainScreen.id);
+  }
+
+  void checkUserSignedIn() async {
+    var userId = await getUserId();
+    if (userId != null) {
+      // callHomeScreen();
+    }
   }
 }

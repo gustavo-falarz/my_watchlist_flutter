@@ -1,4 +1,4 @@
-class Content {
+class ContentModel {
   String id;
 
   String title;
@@ -25,7 +25,7 @@ class Content {
 
   String released;
 
-  Content(
+  ContentModel(
       {this.id,
       this.title,
       this.year,
@@ -40,8 +40,8 @@ class Content {
       this.runtime,
       this.released});
 
-  static Content fromJson(dynamic json) {
-    Content content = Content(
+  static ContentModel fromJson(dynamic json) {
+    ContentModel content = ContentModel(
       id: json['id'],
       title: json['Title'],
       year: json['Year'],
@@ -75,10 +75,10 @@ class Content {
         'Released': released,
       };
 
-  static List<Content> fromJsonList(dynamic jsonList) {
-    List<Content> contents = [];
+  static List<ContentModel> fromJsonList(dynamic jsonList) {
+    List<ContentModel> contents = [];
     for (var json in jsonList) {
-      Content content = fromJson(json);
+      ContentModel content = fromJson(json);
       contents.add(content);
     }
     return contents;

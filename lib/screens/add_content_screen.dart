@@ -3,9 +3,9 @@ import 'package:mywatchlist/components/base_container.dart';
 import 'package:mywatchlist/components/buttons/back_button.dart';
 import 'package:mywatchlist/components/headers/top_search_header.dart';
 import 'package:mywatchlist/components/lists/search_content_list.dart';
-import 'package:mywatchlist/model/content.dart';
+import 'package:mywatchlist/model/content_model.dart';
 import 'package:mywatchlist/model/content_data.dart';
-import 'package:mywatchlist/model/dto/content_dto.dart';
+import 'package:mywatchlist/model/new_content_model.dart';
 import 'package:mywatchlist/services/content_service.dart';
 import 'package:mywatchlist/utils/data_utils.dart';
 import 'package:mywatchlist/utils/task_controller.dart';
@@ -63,14 +63,14 @@ class _AddContentScreenState extends State<AddContentScreen> {
     );
   }
 
-  void addToWatchlist(Content content) {
+  void addToWatchlist(ContentModel content) {
     TaskController(
       task: () async {
-        var contentDTO = ContentDTO(
+        var newContent = NewContentModel(
           content: content,
           userId: await getUserId(),
         );
-        var message = await ContentService.addContentToWatchlist(contentDTO);
+        var message = await ContentService.addContentToWatchlist(newContent);
         showMyDialog(
           context,
           title: 'Success',

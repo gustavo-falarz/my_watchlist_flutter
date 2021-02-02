@@ -1,13 +1,13 @@
-import '../content.dart';
+import 'content_model.dart';
 
-class ContentDTO {
+class NewContentModel {
   String userId;
 
-  Content content;
+  ContentModel content;
 
   String type;
 
-  ContentDTO({this.userId, this.content, this.type});
+  NewContentModel({this.userId, this.content, this.type});
 
   Map<String, dynamic> toJson() =>
       {'userId': userId, 'content': content.toJson(), 'type': type};

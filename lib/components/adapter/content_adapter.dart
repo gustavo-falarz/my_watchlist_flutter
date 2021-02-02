@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/constants.dart';
-import 'package:mywatchlist/model/content.dart';
+import 'package:mywatchlist/model/content_model.dart';
 import 'package:mywatchlist/screens/content_detail_screen.dart';
 
 class ContentAdapter extends StatelessWidget {
-  final Content content;
+  final ContentModel content;
 
   const ContentAdapter({@required this.content});
 

@@ -1,14 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
 
-class User {
+class UserModel {
   String id;
   String email;
   String status;
 
-  User({this.id, this.email, this.status});
+  UserModel({this.id, this.email, this.status});
 
-  static User fromJson(dynamic json) {
-    User user = User(
+  static UserModel fromJson(dynamic json) {
+    UserModel user = UserModel(
       id: json['id'],
       email: json['email'],
       status: json['status'],

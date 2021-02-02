@@ -3,8 +3,8 @@ import 'package:mywatchlist/components/base_container.dart';
 import 'package:mywatchlist/components/buttons/back_button.dart';
 import 'package:mywatchlist/components/buttons/round_icon_button.dart';
 import 'package:mywatchlist/constants.dart';
-import 'package:mywatchlist/model/content.dart';
-import 'package:mywatchlist/model/dto/content_dto.dart';
+import 'package:mywatchlist/model/content_model.dart';
+import 'package:mywatchlist/model/new_content_model.dart';
 import 'package:mywatchlist/services/content_service.dart';
 import 'package:mywatchlist/utils/data_utils.dart';
 import 'package:mywatchlist/utils/ui_utils.dart';
@@ -19,7 +19,7 @@ class ContentDetails extends StatefulWidget {
 class _ContentDetailsState extends State<ContentDetails> {
   @override
   Widget build(BuildContext context) {
-    final Content content = ModalRoute.of(context).settings.arguments;
+    final ContentModel content = ModalRoute.of(context).settings.arguments;
     return BaseContainer(
       child: Stack(
         alignment: Alignment.topCenter,
@@ -137,14 +137,14 @@ class _ContentDetailsState extends State<ContentDetails> {
     );
   }
 
-  deleteContent(Content content) async {
+  deleteContent(ContentModel content) async {
     showProgress(context);
-    var contentDTO = ContentDTO(
+    var newContent = NewContentModel(
       content: content,
       userId: await getUserId(),
     );
     try {
-      var message = await ContentService.deleteFromWatchlist(contentDTO);
+      var message = await ContentService.deleteFromWatchlist(newContent);
       showMyDialog(
         context,
         title: 'Success',
@@ -164,14 +164,14 @@ class _ContentDetailsState extends State<ContentDetails> {
     }
   }
 
-  archiveContent(Content content) async {
+  archiveContent(ContentModel content) async {
     showProgress(context);
-    var contentDTO = ContentDTO(
+    var newContent = NewContentModel(
       content: content,
       userId: await getUserId(),
     );
     try {
-      var message = await ContentService.archiveFromWatchlist(contentDTO);
+      var message = await ContentService.archiveFromWatchlist(newContent);
       showMyDialog(
         context,
         title: 'Success',

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/components/buttons/round_icon_button.dart';
 import 'package:mywatchlist/constants.dart';
-import 'package:mywatchlist/model/content.dart';
-import 'package:mywatchlist/screens/content_detail_screen.dart';
+import 'package:mywatchlist/model/content_model.dart';
 
 class SearchContentAdapter extends StatelessWidget {
-  final Content content;
+  final ContentModel content;
   final Function onCLickAdd;
 
   const SearchContentAdapter({@required this.content, this.onCLickAdd});

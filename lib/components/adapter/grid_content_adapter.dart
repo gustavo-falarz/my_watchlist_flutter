@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/constants.dart';
-import 'package:mywatchlist/model/content.dart';
+import 'package:mywatchlist/model/content_model.dart';
 
 class GridContentAdapter extends StatelessWidget {
-  final Content content;
+  final ContentModel content;
   final Function onPressed;
 
   const GridContentAdapter({@required this.content, this.onPressed});

@@ -1,28 +1,30 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:mywatchlist/model/dto/user_dto.dart';
-import 'package:mywatchlist/model/user.dart';
+import 'package:mywatchlist/model/new_user_model.dart';
+import 'file:///C:/Users/Gustavo/StudioProjects/my_watchlist/lib/model/auth_model.dart';
+import 'package:mywatchlist/model/result_model.dart';
+import 'package:mywatchlist/model/user_model.dart';
 
 import 'network.dart';
 
 class UserService {
-  static Future<User> validate(String email, String password) async {
-    const url = 'user/validate';
+  static Future<UserModel> validate(String email, String password) async {
+    const url = 'v1/user/validate';
 
-    UserDTO dto = UserDTO(email: email, password: password);
+    AuthModel dto = AuthModel(email: email, password: password);
     var json = await HttpService.doPost(url, dto.toJson());
-    User user = User.fromJson(json);
+    UserModel user = UserModel.fromJson(json);
     return user;
   }
 
-  static Future<User> register(String email, String password) async {
-    const url = 'user/add';
+  static Future<ResultModel> register(String email) async {
+    const url = 'v1/user/register';
 
-    UserDTO dto = UserDTO(email: email, password: password);
-    Response response = await HttpService.doPost(url, dto.toJson());
+    NewUserModel dto = NewUserModel(email: email);
+    Response response = await HttpService.doPut(url, dto.toJson());
     var json = jsonDecode(response.body);
-    User user = User.fromJson(json);
-    return user;
+    ResultModel result = ResultModel.fromJson(json);
+    return result;
   }
 }

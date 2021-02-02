@@ -1,28 +1,28 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:mywatchlist/model/content.dart';
+import 'package:mywatchlist/model/content_model.dart';
 
 class ContentData extends ChangeNotifier {
-  List<Content> _contentList = [];
-  List<Content> _searchContentList = [];
+  List<ContentModel> _contentList = [];
+  List<ContentModel> _searchContentList = [];
 
   bool _progressVisible = false;
 
-  UnmodifiableListView<Content> get contentList {
+  UnmodifiableListView<ContentModel> get contentList {
     return UnmodifiableListView(_contentList);
   }
 
-  UnmodifiableListView<Content> get searchContentList {
+  UnmodifiableListView<ContentModel> get searchContentList {
     return UnmodifiableListView(_searchContentList);
   }
 
-  void updateContentList(List<Content> newContent) {
+  void updateContentList(List<ContentModel> newContent) {
     _contentList = newContent;
     notifyListeners();
   }
 
-  void updateSearchContentList(List<Content> newContent) {
+  void updateSearchContentList(List<ContentModel> newContent) {
     _searchContentList = newContent;
     notifyListeners();
   }

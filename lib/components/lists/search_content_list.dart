@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mywatchlist/components/adapter/search_content_adapter.dart';
 import 'package:mywatchlist/constants.dart';
-import 'package:mywatchlist/model/content.dart';
+import 'package:mywatchlist/model/content_model.dart';
 import 'package:mywatchlist/model/content_data.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +12,7 @@ class SearchContentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Content> contentList =
+    List<ContentModel> contentList =
         Provider.of<ContentData>(context).searchContentList;
 
     return Container(
