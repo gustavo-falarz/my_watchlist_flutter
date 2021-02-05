@@ -9,23 +9,22 @@ import 'package:mywatchlist/utils/ui_utils.dart';
 
 import '../constants.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  static const String id = 'register';
+class PasswordRecoveryScreen extends StatefulWidget {
+  static const String id = 'password-recovery';
 
   @override
-  _RegistrationState createState() => _RegistrationState();
+  _PasswordRecoveryScreenState createState() => _PasswordRecoveryScreenState();
 }
 
-class _RegistrationState extends State<RegistrationScreen> {
+class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
   String email;
 
   @override
   Widget build(BuildContext context) {
     return BaseContainer(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Sign-up'),
+          title: Text('Password recovery'),
         ),
         backgroundColor: colorPrimary,
         body: SingleChildScrollView(
@@ -36,13 +35,13 @@ class _RegistrationState extends State<RegistrationScreen> {
             children: <Widget>[
               Container(
                 height: 150.0,
-                child: Image.asset('images/popcorn.png'),
+                child: Image.asset('images/padlock.png'),
               ),
               SizedBox(
                 height: 40.0,
               ),
               Text(
-                'Just a few clicks away...',
+                'Forgot your password?',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
@@ -52,10 +51,9 @@ class _RegistrationState extends State<RegistrationScreen> {
                 height: 20.0,
               ),
               Text(
-                "In order to save your lists you need to create an account"
-                " and for that we only ask for your email address."
-                " But rest assured, this information is safely stored and "
-                "won't be shared with third parties.",
+                "Don't sweat it, fill in the email address you used to create "
+                "your account and we will send you an email with "
+                "instructions to reset your password.",
                 style: TextStyle(color: Colors.white),
               ),
               SizedBox(
@@ -72,9 +70,9 @@ class _RegistrationState extends State<RegistrationScreen> {
               ),
               RoundedButton(
                 onPressed: () {
-                  register();
+                  recover();
                 },
-                label: 'Register',
+                label: 'Recover password',
                 color: additionalButton,
               ),
             ],
@@ -84,10 +82,10 @@ class _RegistrationState extends State<RegistrationScreen> {
     );
   }
 
-  void register() {
+  void recover() {
     TaskController(
       task: () async {
-        ResultModel result = await UserService.register(email.trim());
+        ResultModel result = await UserService.recoverPassword(email.trim());
         showMyDialog(
           context,
           title: 'Success',
@@ -110,5 +108,6 @@ class _RegistrationState extends State<RegistrationScreen> {
         hideProgress(context);
       },
     ).execute();
+
   }
 }

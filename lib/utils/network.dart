@@ -4,27 +4,42 @@ import 'package:http/http.dart';
 import 'package:mywatchlist/utils/service_exception.dart';
 
 class HttpService {
-  static String baseUrl = 'https://new-watchlist.herokuapp.com/';
+  static String baseUrl = 'new-watchlist.herokuapp.com';
   static Map<String, String> headers = {'Content-Type': 'application/json'};
 
   static Future<dynamic> doGet(String url) async {
-    Response response = await get('$baseUrl$url');
+    var uri = Uri.https(baseUrl, url);
+    Response response = await get(uri, headers: headers);
     check(response);
     return jsonDecode(response.body);
   }
 
   static Future<dynamic> doPost(String url, Map<String, dynamic> body) async {
     var bodyJson = json.encode(body);
-    Response response =
-        await post('$baseUrl$url', headers: headers, body: bodyJson);
+    var uri = Uri.https(baseUrl, url);
+    Response response = await post(uri, headers: headers, body: bodyJson);
+    check(response);
+    return jsonDecode(response.body);
+  }
+
+  static Future<dynamic> doPostForm(String url, Map<String, String> params) async {
+    var uri = Uri.https(baseUrl, url, params);
+    Response response = await post(uri, headers: headers);
     check(response);
     return jsonDecode(response.body);
   }
 
   static Future<dynamic> doPut(String url, Map<String, dynamic> body) async {
     var bodyJson = json.encode(body);
-    Response response =
-        await put('$baseUrl$url', headers: headers, body: bodyJson);
+    var uri = Uri.https(baseUrl, url);
+    Response response = await put(uri, headers: headers, body: bodyJson);
+    check(response);
+    return jsonDecode(response.body);
+  }
+
+  static Future<dynamic> doPutForm(String url, Map<String, String> params) async {
+    var uri = Uri.https(baseUrl, url, params);
+    Response response = await put(uri, headers: headers);
     check(response);
     return jsonDecode(response.body);
   }

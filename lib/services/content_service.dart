@@ -1,8 +1,8 @@
 import 'package:mywatchlist/model/content_model.dart';
 import 'package:mywatchlist/model/new_content_model.dart';
-import 'package:mywatchlist/services/network.dart';
 import 'package:mywatchlist/utils/data_utils.dart';
 import 'package:mywatchlist/utils/message_utils.dart';
+import 'package:mywatchlist/utils/network.dart';
 
 
 class ContentService {

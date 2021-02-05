@@ -3,6 +3,7 @@ import 'package:mywatchlist/components/base_container.dart';
 import 'package:mywatchlist/components/buttons/rounded_button.dart';
 import 'package:mywatchlist/components/text_field/rounded_text_field.dart';
 import 'package:mywatchlist/screens/main_screen.dart';
+import 'package:mywatchlist/screens/password_recovery_screen.dart';
 import 'package:mywatchlist/screens/registration_screen.dart';
 import 'package:mywatchlist/services/user_service.dart';
 import 'package:mywatchlist/utils/data_utils.dart';
@@ -85,11 +86,19 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 20.0,
               ),
-              Text(
-                "Forgot password",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15.0,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    PasswordRecoveryScreen.id,
+                  );
+                },
+                child: Text(
+                  "Forgot password",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.0,
+                  ),
                 ),
               )
             ],
@@ -102,7 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() {
     TaskController(
       task: () async {
-        var user = await UserService.validate(email.trim(), password.trim());
+        var user = await UserService.validate(
+          email.trim(),
+          password.trim(),
+        );
         setUserId(user.id);
         callHomeScreen();
       },
@@ -122,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void callHomeScreen() {
-      Navigator.pushNamed(context, MainScreen.id);
+    Navigator.pushNamed(context, MainScreen.id);
   }
 
   void checkUserSignedIn() async {
