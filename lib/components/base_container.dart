@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class BaseContainer extends StatefulWidget {
   final Widget child;
 
-  const BaseContainer({this.child});
+  const BaseContainer({@required this.child});
 
   @override
   _BaseContainerState createState() => _BaseContainerState();

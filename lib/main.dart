@@ -6,6 +6,7 @@ import 'package:mywatchlist/screens/content_detail_screen.dart';
 import 'package:mywatchlist/screens/login_screen.dart';
 import 'package:mywatchlist/screens/main_screen.dart';
 import 'package:mywatchlist/screens/password_recovery_screen.dart';
+import 'package:mywatchlist/screens/change_password_screen.dart';
 import 'package:mywatchlist/screens/registration_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,7 @@ void main() {
           AddContentScreen.id: (context) => AddContentScreen(),
           RegistrationScreen.id: (context) => RegistrationScreen(),
           LoginScreen.id: (context) => LoginScreen(),
+          ChangePasswordScreen.id: (context) => ChangePasswordScreen(),
           PasswordRecoveryScreen.id: (context) => PasswordRecoveryScreen(),
         },
         theme: ThemeData(

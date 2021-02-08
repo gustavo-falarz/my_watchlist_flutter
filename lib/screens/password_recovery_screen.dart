@@ -54,7 +54,9 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
                 "Don't sweat it, fill in the email address you used to create "
                 "your account and we will send you an email with "
                 "instructions to reset your password.",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
               SizedBox(
                 height: 20.0,
@@ -108,6 +110,5 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
         hideProgress(context);
       },
     ).execute();
-
   }
 }
