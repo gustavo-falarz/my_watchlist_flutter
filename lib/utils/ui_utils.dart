@@ -25,6 +25,7 @@ Future<void> showMyDialog(BuildContext context,
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
+    useRootNavigator: true,
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(title),

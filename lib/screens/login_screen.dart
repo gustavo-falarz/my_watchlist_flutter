@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mywatchlist/components/base_container.dart';
 import 'package:mywatchlist/components/buttons/rounded_button.dart';
 import 'package:mywatchlist/components/text_field/rounded_text_field.dart';
+import 'package:mywatchlist/model/user_model.dart';
+import 'package:mywatchlist/screens/change_password_screen.dart';
 import 'package:mywatchlist/screens/main_screen.dart';
 import 'package:mywatchlist/screens/password_recovery_screen.dart';
 import 'package:mywatchlist/screens/registration_screen.dart';
@@ -47,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundedTextField(
                 hint: "Email",
                 onTextChanged: (text) {
-                  email = text;
+                  email = text.trim();
                 },
               ),
               SizedBox(
@@ -57,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscure: true,
                 hint: "Password",
                 onTextChanged: (text) {
-                  password = text;
+                  password = text.trim();
                 },
               ),
               SizedBox(
@@ -112,11 +114,10 @@ class _LoginScreenState extends State<LoginScreen> {
     TaskController(
       task: () async {
         var user = await UserService.validate(
-          email.trim(),
-          password.trim(),
+          email,
+          password,
         );
-        setUserId(user.id);
-        callHomeScreen();
+        onUserLoggedIn(user);
       },
       onStart: () {
         showProgress(context);
@@ -140,7 +141,20 @@ class _LoginScreenState extends State<LoginScreen> {
   void checkUserSignedIn() async {
     var userId = await getUserId();
     if (userId != null) {
-      // callHomeScreen();
+      callHomeScreen();
+    }
+  }
+
+  void onUserLoggedIn(UserModel user) {
+    if (user.status == 'PENDING_RESET') {
+      Navigator.pushNamed(
+        context,
+        ChangePasswordScreen.id,
+        arguments: email,
+      );
+    } else {
+      saveUserId(user.id);
+      callHomeScreen();
     }
   }
 }

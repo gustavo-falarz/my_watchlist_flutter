@@ -14,13 +14,13 @@ class UserService {
     return user;
   }
 
-  static Future<ResultModel> changePassword(
-      String email, String password) async {
+  static Future<UserModel> changePassword(
+      {String email, String password}) async {
     const url = 'v1/user/change-password';
 
     AuthModel auth = AuthModel(email: email, password: password);
     var json = await HttpService.doPost(url, auth.toJson());
-    ResultModel result = ResultModel.fromJson(json);
+    UserModel result = UserModel.fromJson(json);
     return result;
   }
 
